@@ -832,8 +832,9 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "2aff7997-fa6a-4fbc-ada0-33635553fa01",
+				"id": "251367a1-94ef-4594-969e-c180a0278ba6",
 				"type": "text/javascript",
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -842,8 +843,9 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "f8399d3b-37ae-49e2-86c7-ce6da37a44a4",
+				"id": "bb75aed3-4e91-4d0c-8c27-b98fe4649676",
 				"type": "text/javascript",
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -853,13 +855,11 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "https://pro-api.coinmarketcap.com",
-			"type": "string"
+			"value": "https://pro-api.coinmarketcap.com"
 		},
 		{
 			"key": "API_KEY",
-			"value": "",
-			"type": "string"
+			"value": ""
 		}
 	]
 }
