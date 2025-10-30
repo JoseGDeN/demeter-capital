@@ -1,0 +1,865 @@
+{
+	"info": {
+		"_postman_id": "45608627-e25dba63-f4e8-4036-a17c-8c346ce31d48",
+		"name": "CoinMarketCap DEX APIs",
+		"description": "In this Postman collection, you can test our 8 new DEX APIs.\n\nFor more details on how to get started, visit this [link](https://coinmarketcap.com/academy/article/the-wait-is-over-cmc-releases-5-new-apis-to-complete-dex-suite). You can find expected responses for each API in this [Google Sheet](https://docs.google.com/spreadsheets/d/1VQ-GQ24omnCfoPRezqA2vCnoBLGt0RseKtchwhzBsHY/edit#gid=2054073052).\n\nWant to get started? Are you an existing API user? Log in [here](https://pro.coinmarketcap.com/login/). Are you a new API user? Sign up for free [here](https://pro.coinmarketcap.com/signup/?plan=0). All users (existing and new) have free access to 1 million credits monthly.\n\nIf you have any questions or are an enterprise looking for additional support, contact us at api@coinmarketcap.com.\n\nHappy building!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Jan 2024 Soft Launch",
+			"item": [
+				{
+					"name": "/v4/dex/pairs/ohlcv/latest - Latest quotes",
+					"id": "45608627-b5ebacfe-3c56-4c4a-add0-369150bbafb5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{API_KEY}}",
+								"description": "Provide your API Key here",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v4/dex/spot-pairs/latest",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v4",
+								"dex",
+								"spot-pairs",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "contract_address",
+									"value": "string",
+									"type": "text",
+									"description": "One or more comma-separated contract addresses. Example: \"0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640,\n0xc2e9f25be6257c210d7adf0d4cd6e3e881ba25f8\"\n\nNote: contract_address is case sensitive for all non-EVM chains and not case sensitive for all EVM chains. EVM chains \ncontract addresses begin with 0x, and are followed by 40 alphanumeric characters (numerals and letters).",
+									"disabled": true
+								},
+								{
+									"key": "network_id",
+									"value": "string",
+									"type": "text",
+									"description": "One CoinMarketCap cryptocurrency network ids. Example: \"1\"",
+									"disabled": true
+								},
+								{
+									"key": "network_slug",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one network names in URL friendly shorthand \"slug\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"ethereum\". At least one \"id\" or \"slug\" is required.",
+									"disabled": true
+								},
+								{
+									"key": "aux",
+									"value": "string, default: null",
+									"type": "text",
+									"description": "Optionally specify a comma-separated list of supplemental data fields to return. \nPass a valid value to include the auxiliary field.\n\nValid values:\n\"date_launched\" ,\"num_transactions_24h\", \"holders\", \"24h_no_of_buys\", \n\"24h_no_of_sells\",  \"24h_buy_volume\", \"24h_sell_volume\", \"pool_created\", \"buy_tax\", \"sell_tax\", \n\"security_scan\", \"pool_base_asset\", \"pool_quote_asset\", \"percent_pooled_base_asset\", \"24h_volume_quote_asset\", \n\"total_supply_quote_asset\"",
+									"disabled": true
+								},
+								{
+									"key": "convert_id",
+									"value": "string, default: null",
+									"type": "text",
+									"description": "Optionally calculate market quotes in up to 30 currencies at once by passing a comma-separated list of cryptocurrency \nor fiat currency IDs. Each additional convert option beyond the first requires an additional call credit. A list of \nsupported fiat options can be found in our API document. Each conversion is returned in its own \"quote\" object.\n\nExample: If you want to know the market quote is BTC and USD, you can use convert_id=1,2781.\n\nPlease note that the maximum number of results we return in each API call is 500. If the no. of convert_id param \nmultiplied by the limit param per API call is more than 500, you will receive an error message. ",
+									"disabled": true
+								},
+								{
+									"key": "skip_invalid",
+									"value": "boolean, default: true",
+									"type": "text",
+									"description": "Pass true to relax request validation rules. When requesting records on multiple spot pairs an error is returned \nif no match is found for 1 or more requested spot pairs. If set to true, invalid lookups will be skipped allowing valid \nspot pairs to still be returned.",
+									"disabled": true
+								},
+								{
+									"key": "reverse_order",
+									"value": "boolean, default: false",
+									"type": "text",
+									"description": "Pass true to invert the order of a spot pair. For example, a trading pair is set up as Token B/Token A in the contract and \nis commonly referred to as Token A/Token B. Using reverse_order would change the order to reflect the true \nToken B/Token A pairing as it exists in the pool. ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v4/dex/spot-pairs/latest - Latest listings of pairs",
+					"id": "45608627-7158be47-c26a-423a-ab05-33bd6069cdce",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{API_KEY}}",
+								"description": "Provide your API Key here",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v4/dex/spot-pairs/latest",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v4",
+								"dex",
+								"spot-pairs",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "network_id",
+									"value": "string",
+									"description": "One or more comma-separated CoinMarketCap cryptocurrency network ids. Example: \"1,2\". At least one \"id\" or \"slug\" is required.",
+									"disabled": true
+								},
+								{
+									"key": "network_slug",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one or more comma-separated network names in URL friendly shorthand \"slug\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"ethereum,base\". At least one \"id\" or \"slug\" is required.",
+									"disabled": true
+								},
+								{
+									"key": "dex_id",
+									"value": "string",
+									"type": "text",
+									"description": "One or more comma-separated CoinMarketCap dex exchange ids. Example: \"1,2\"",
+									"disabled": true
+								},
+								{
+									"key": "dex_slug",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one or more comma-separated dex exchange names in URL friendly shorthand \"slug\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"uniswap,pancakeswap\". ",
+									"disabled": true
+								},
+								{
+									"key": "base_asset_id",
+									"value": "string",
+									"type": "text",
+									"description": "One or more comma-separated CoinMarketCap dex ids. Example: \"1,2\"",
+									"disabled": true
+								},
+								{
+									"key": "base_asset_symbol",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one or more comma-separated network symbol in URL friendly shorthand \"slug\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"ethereum,usdt\". ",
+									"disabled": true
+								},
+								{
+									"key": "base_asset_contract_address",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one base asset contract address in URL friendly shorthand \"\"slug\"\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"\"ethereum,usdt\"\". ",
+									"disabled": true
+								},
+								{
+									"key": "base_asset_ucid",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one or more comma-separated CoinMarketCap cryptocurrency IDs. Example: \"1,1027\"",
+									"disabled": true
+								},
+								{
+									"key": "quote_asset_id",
+									"value": "string",
+									"type": "text",
+									"description": "One or more comma-separated CoinMarketCap dex ids. Example: \"1,2\"",
+									"disabled": true
+								},
+								{
+									"key": "quote_asset_symbol",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one or more comma-separated network symbol in URL friendly shorthand \"slug\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"ethereum,usdt\". ",
+									"disabled": true
+								},
+								{
+									"key": "quote_asset_contract_address",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one quote asset contract address in URL friendly shorthand \"\"slug\"\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"\"ethereum,usdt\"\". ",
+									"disabled": true
+								},
+								{
+									"key": "quote_asset_ucid",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one or more comma-separated CoinMarketCap cryptocurrency IDs. Example: \"1,1027\"",
+									"disabled": true
+								},
+								{
+									"key": "scroll_id",
+									"value": "string",
+									"type": "text",
+									"description": "After your initial query, the API responds with the initial set of results and a \"scroll_id\"s. To retrieve the next \nset of results, provide this scroll_id of the last JSON with your follow-up request. scroll_id is an alternative to traditional \npagination techniques. ",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "integer, [1 .. 100], Default = 50",
+									"type": "text",
+									"description": "Optionally specify the number of results to return. Use this parameter and the \n\"scroll_id\" parameter to determine your own pagination size.",
+									"disabled": true
+								},
+								{
+									"key": "price_min",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of minimum USD price to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "price_max",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of maximum USD price to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "liquidity_min",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of minimum liquidity to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "liquidity_max",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of maximum liquidity to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "volume_24h_min",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of minimum 24 hour USD volume to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "volume_24h_max",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of maximum 24 hour USD volume to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "fully_diluted_value_min",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of minimum fully diluted value to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "fully_diluted_value_max",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of maximum fully diluted value to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "no_of_transactions_24h_min",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of minimum 24h no. of transactions to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "no_of_transactions_24h_max",
+									"value": "number, [ 0 .. 100000000000000000 ]",
+									"type": "text",
+									"description": "Optionally specify a threshold of maximum 24h no. of transactions to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "percent_change_24h_min",
+									"value": "number  >= -100",
+									"type": "text",
+									"description": "Optionally specify a threshold of minimum 24 hour percent change to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "percent_change_24h_max",
+									"value": "number  >= -100",
+									"type": "text",
+									"description": "Optionally specify a threshold of maximum 24 hour percent change to filter results by.",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "string, default = \"volume_24h\"",
+									"type": "text",
+									"description": "What field to sort the list of dex spot pairs by.\n\n\nValid values:\n\"volume_24h\",\"percent_change_24h\", \"liquidity\", \"no_of_transactions_24h",
+									"disabled": true
+								},
+								{
+									"key": "sort_dir",
+									"value": "string, default = \"asc\"",
+									"type": "text",
+									"description": "The direction in which to order dex spot pairs against the specified sort.\n\nValid values:\n\"asc\", \"desc\"",
+									"disabled": true
+								},
+								{
+									"key": "aux",
+									"value": "string, default: null",
+									"type": "text",
+									"description": "Optionally specify a comma-separated list of supplemental data fields to return. Only 24h_buy_volume and \n24h_sell_volume are returned in quote JSON.\n\nPass a valid value to include the auxiliary field.\n\nValid values:\n\"num_transactions_24h\", \"holders\", \"24h_no_of_buys\", \n\"24h_no_of_sells\",  \"24h_buy_volume\", \"24h_sell_volume\", \"pool_created\", \"buy_tax\", \"sell_tax\", \n\"security_scan\", \"pool_base_asset\", \"pool_quote_asset\", \"percent_pooled_base_asset\", \"24h_volume_quote_asset\", \n\"total_supply_quote_asset\"",
+									"disabled": true
+								},
+								{
+									"key": "convert_id",
+									"value": "string, default: null",
+									"type": "text",
+									"description": "Optionally calculate market quotes in up to 30 currencies at once by passing a comma-separated list of cryptocurrency \nor fiat currency IDs. Each additional convert option beyond the first requires an additional call credit. A list of \nsupported fiat options can be found in our API document. Each conversion is returned in its own \"quote\" object.\n\nExample: If you want to know the market quote is BTC and USD, you can use convert_id=1,2781.\n\nPlease note that the maximum number of results we return in each API call is 500. If the no. of convert_id param \nmultiplied by the limit param per API call is more than 500, you will receive an error message. ",
+									"disabled": true
+								},
+								{
+									"key": "reverse_order",
+									"value": "boolean, default: false",
+									"type": "text",
+									"description": "Pass true to invert the order of a spot pair. For example, a trading pair is set up as Token B/Token A in the contract and \nis commonly referred to as Token A/Token B. Using reverse_order would change the order to reflect the true \nToken B/Token A pairing as it exists in the pool. ",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v4/dex/pairs/quotes/latest - Latest quotes",
+					"id": "45608627-5cc407df-2204-4536-9be1-ea55b0f03ffe",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{API_KEY}}",
+								"description": "Provide your API Key here",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v4/dex/pairs/quotes/latest",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v4",
+								"dex",
+								"pairs",
+								"quotes",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "contract_address",
+									"value": "string",
+									"type": "text",
+									"description": "One or more comma-separated contract addresses. Example: \"0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640,\n0xc2e9f25be6257c210d7adf0d4cd6e3e881ba25f8\"\n\nNote: contract_address is case sensitive for all non-EVM chains and not case sensitive for all EVM chains. EVM chains \ncontract addresses begin with 0x, and are followed by 40 alphanumeric characters (numerals and letters).",
+									"disabled": true
+								},
+								{
+									"key": "network_id",
+									"value": "string",
+									"type": "text",
+									"description": "One CoinMarketCap cryptocurrency network ids. Example: \"1\"",
+									"disabled": true
+								},
+								{
+									"key": "network_slug",
+									"value": "string",
+									"type": "text",
+									"description": "Alternatively, one network names in URL friendly shorthand \"slug\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"ethereum\". At least one \"id\" or \"slug\" is required.",
+									"disabled": true
+								},
+								{
+									"key": "aux",
+									"value": "string, default: null",
+									"type": "text",
+									"description": "Optionally specify a comma-separated list of supplemental data fields to return. Only 24h_buy_volume and \n24h_sell_volume are returned in quote JSON.\n\nPass a valid value to include the auxiliary field.\n\nValid values:\n\"num_transactions_24h\", \"holders\", \"24h_no_of_buys\", \n\"24h_no_of_sells\",  \"24h_buy_volume\", \"24h_sell_volume\", \"pool_created\", \"buy_tax\", \"sell_tax\", \n\"security_scan\", \"pool_base_asset\", \"pool_quote_asset\", \"percent_pooled_base_asset\", \"24h_volume_quote_asset\", \n\"total_supply_quote_asset\"",
+									"disabled": true
+								},
+								{
+									"key": "convert_id",
+									"value": "string, default: null",
+									"type": "text",
+									"description": "Optionally calculate market quotes in up to 30 currencies at once by passing a comma-separated list of cryptocurrency \nor fiat currency IDs. Each additional convert option beyond the first requires an additional call credit. A list of supported fiat options can be found in our API document. Each conversion is returned in its own \"quote\" object.\n\nExample: If you want to know the market quote is BTC and USD, you can use convert_id=1,2781.\n\nPlease note that the maximum number of results we return in each API call is 500. If the no. of convert_id param \nmultiplied by the limit param per API call is more than 500, you will receive an error message. ",
+									"disabled": true
+								},
+								{
+									"key": "skip_invalid",
+									"value": "boolean, default: true",
+									"type": "text",
+									"description": "Pass true to relax request validation rules. When requesting records on multiple spot pairs an error is returned \nif no match is found for 1 or more requested spot pairs. If set to true, invalid lookups will be skipped allowing valid \nspot pairs to still be returned.",
+									"disabled": true
+								},
+								{
+									"key": "reverse_order",
+									"value": "boolean, default: false",
+									"type": "text",
+									"description": "Pass true to invert the order of a spot pair. For example, a trading pair is set up as Token B/Token A in the contract and \nis commonly referred to as Token A/Token B. Using reverse_order would change the order to reflect the true \nToken B/Token A pairing as it exists in the pool. ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "45608627-a4a43daa-f389-4729-9c41-4b749e70731a",
+			"description": "For more details on how to get started, visit this [link](https://coinmarketcap.com/academy/article/dex-apis-soft-launch-unveiling-coinmarketcaps-first-dex-api-suite). You can find expected responses for each API in this [Google Sheet](https://docs.google.com/spreadsheets/d/1VQ-GQ24omnCfoPRezqA2vCnoBLGt0RseKtchwhzBsHY/edit#gid=2054073052).\n\nWant to get started? Are you an existing API user? Log in [here](https://pro.coinmarketcap.com/login/). Are you a new API user? Sign up for free [here](https://pro.coinmarketcap.com/signup/?plan=0). All users (existing and new) have free access to 1 million credits monthly.\n\nIf you have any questions or are an enterprise looking for additional support, contact us at api@coinmarketcap.com.\n\nHappy building!"
+		},
+		{
+			"name": "July 2024  Soft Launch",
+			"item": [
+				{
+					"name": "/v4/dex/listings/quotes - Latest listings of DEXes",
+					"id": "45608627-e3507ee9-5861-4499-870a-e3dc948da90a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v4/dex/listings/quotes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v4",
+								"dex",
+								"listings",
+								"quotes"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "integer >= 1, default = 1",
+									"description": "Optionally offset the start (1-based index) of the paginated list of items to return.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "integer, [1 .. 500], Default = 50",
+									"description": "Optionally specify the number of results to return. Use this parameter and the \n\n\"start\" parameter to determine your own pagination size.",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "string, default = volume_24h",
+									"description": "What field to sort the list of exchanges by.\n\nValid values:\n\"name\", \"volume_24h\", \"market_share\", \"num_markets\" (number of markets)",
+									"disabled": true
+								},
+								{
+									"key": "sort_dir",
+									"value": "string, default = \"asc\"",
+									"description": "The direction in which to order exchanges against the specified sort.\n\nValid values:\n\"asc\", \"desc\"",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "string, default = \"all\"",
+									"description": "The category for this exchange.\n\nValid values: \n\"all\", \"orderbook\", \"swap\", \"aggregator\"",
+									"disabled": true
+								},
+								{
+									"key": "aux",
+									"value": "string, default: null",
+									"description": "Optionally specify a comma-separated list of supplemental data fields to return. \nPass a valid value to include the auxiliary field.\n\nValid values:\n\"date_launched\"",
+									"disabled": true
+								},
+								{
+									"key": "convert_id",
+									"value": "string, default: null",
+									"description": "Optionally calculate market quotes in up to 30 currencies at once by passing a comma-separated list of cryptocurrency \nor fiat currency IDs. Each additional convert option beyond the first requires an additional call credit. A list of \nsupported fiat options can be found in our API document. Each conversion is returned in its own \"quote\" object.\n\nExample: If you want to know the market quote is BTC and USD, you can use convert_id=1,2781.\n\nPlease note that the maximum number of results we return in each API call is 500. If the no. of convert_id param \nmultiplied by the limit param per API call is more than 500, you will receive an error message. ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v4/dex/listings/info- Metadata of DEXes",
+					"id": "45608627-5dda0cf0-84c0-41bd-9bdc-817645138a78",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v4/dex/listings/info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v4",
+								"dex",
+								"listings",
+								"info"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "One or more comma-separated CoinMarketCap cryptocurrency exchange ids. Example: \"1,2\"",
+									"disabled": true
+								},
+								{
+									"key": "aux",
+									"value": "string, default: \"urls\", \"logo\", \"description\", \"date_launched\", \"notice\"",
+									"description": "Optionally specify a comma-separated list of supplemental data fields to return. \nPass a valid value to include the auxiliary field.\n\nValid values:\n\"urls\", \"logo\", \"description\", \"date_launched\", \"notice\"\n\nMore notes: URLs should include all URLs available (e.g. website, fees, etc). Description should not be what is currently seen on our \nExchange Detail page. If other pages having the same exact content as us, it may not be good for SEO. Please \nreach out to Bryan when trying to create the shortened version. ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v4/dex/networks/list - Returns all networks on CMC",
+					"id": "45608627-edf82cee-6bbb-4b6c-a2bb-a5e85ea008a9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v4/dex/networks/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v4",
+								"dex",
+								"networks",
+								"list"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "integer, >= 1\ndefault = 1",
+									"description": "Optionally offset the start (1-based index) of the paginated list of items to return.",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "integer, [1 .. 500]\nDefault = 50",
+									"description": "Optionally specify the number of results to return. Use this parameter and the \n\"start\" parameter to determine your own pagination size.",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "string, default = \"id\"",
+									"description": "What field to sort the list of networks by.\n\nValid values:\n\"id\", \"name\"",
+									"disabled": true
+								},
+								{
+									"key": "sort_dir",
+									"value": "string, default = \"asc\"",
+									"description": "The direction in which to order networks against the specified sort.\n\nValid values:\n\"asc\", \"desc\"",
+									"disabled": true
+								},
+								{
+									"key": "aux",
+									"value": "string, default: null",
+									"description": "Optionally specify a comma-separated list of supplemental data fields to return. \nPass a valid value to include the auxiliary field.\n\nValid values:\n\"alternativeName\", \"cryptocurrencyId\",  \"cryptocurrenySlug\", \"wrappedTokenId\", \n\"wrappedTokenSlug\", \"tokenExplorerUrl\", \"poolExplorerUrl\", \"transactionHashUrl\"",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v4/dex/pairs/ohlcv/historical - Historical quotes",
+					"id": "45608627-e2535c97-aebb-41c4-9a8e-be47be237f09",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v4/dex/pairs/ohlcv/historical",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v4",
+								"dex",
+								"pairs",
+								"ohlcv",
+								"historical"
+							],
+							"query": [
+								{
+									"key": "contract_address",
+									"value": "string",
+									"description": "One contract address. Example: \"0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640\".\n\nIf network/dex/base asset/quote asset information is passed, contract addresses cannot be passed.\n\nNote: contract_address is case sensitive for all non-EVM chains and not case sensitive for all EVM chains. EVM chains \ncontract addresses begin with 0x, and are followed by 40 alphanumeric characters (numerals and letters).",
+									"disabled": true
+								},
+								{
+									"key": "network_id",
+									"value": "string",
+									"description": "One CoinMarketCap cryptocurrency network ids. Example: \"1\"",
+									"disabled": true
+								},
+								{
+									"key": "network_slug",
+									"value": "string",
+									"description": "Alternatively, one network names in URL friendly shorthand \"slug\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"ethereum\". At least one \"id\" or \"slug\" is required.",
+									"disabled": true
+								},
+								{
+									"key": "time_period",
+									"value": "string, Default: \"daily\"",
+									"description": "Time period to return OHLCV data for. The default is \"daily\". If hourly, the open will be 01:00 and the close will be 01:59. \nIf daily, the open will be 00:00:00 for the day and close will be 23:59:99 for the same day. See the main endpoint \ndescription for details.",
+									"disabled": true
+								},
+								{
+									"key": "time_start",
+									"value": "string",
+									"description": "Timestamp (Unix or ISO 8601) to start returning OHLCV time periods for. Only the date portion of the timestamp \nis used for daily OHLCV so it's recommended to send an ISO date format like \"2018-09-19\" without time.",
+									"disabled": true
+								},
+								{
+									"key": "time_end",
+									"value": "string",
+									"description": "Timestamp (Unix or ISO 8601) to stop returning OHLCV time periods for (inclusive). Optional, if not passed we'll default \nto the current time. Only the date portion of the timestamp is used for daily OHLCV so it's recommended to send an \nISO date format like \"2018-09-19\" without time.",
+									"disabled": true
+								},
+								{
+									"key": "count",
+									"value": "number, [ 0 .. 500 ], Default: 10",
+									"description": "Optionally limit the number of time periods to return results for. The default is 10 items. The current query \nlimit is 500 items.",
+									"disabled": true
+								},
+								{
+									"key": "interval",
+									"value": "string, Default: \"daily\"",
+									"description": "Optionally adjust the interval that \"time_period\" is sampled. For example with interval=monthly&time_period=daily you \nwill see a daily OHLCV record for January, February, March and so on. See main endpoint description for available options.\n\nValid values:\n\"1m\", \"5m\", \"15m\", \"30m\", \"1h\", \"4h\", \"8h\", \"12h\", \"daily\", \"weekly\", \"monthly\"",
+									"disabled": true
+								},
+								{
+									"key": "aux",
+									"value": "string, default: null",
+									"description": "Optionally specify a comma-separated list of supplemental data fields to return. \nPass a valid value to include the auxiliary field.\n\nValid values:\n\"date_launched\" ,\"num_transactions_24h\", \"holders\", \"24h_no_of_buys\", \n\"24h_no_of_sells\",  \"24h_buy_volume\", \"24h_sell_volume\", \"pool_created\", \"buy_tax\", \"sell_tax\", \n\"security_scan\", \"pool_base_asset\", \"pool_quote_asset\", \"percent_pooled_base_asset\", \"24h_volume_quote_asset\", \n\"total_supply_quote_asset\"",
+									"disabled": true
+								},
+								{
+									"key": "convert_id",
+									"value": "string, default: null",
+									"description": "Optionally calculate market quotes in up to 30 currencies at once by passing a comma-separated list of cryptocurrency \nor fiat currency IDs. Each additional convert option beyond the first requires an additional call credit. A list of \nsupported fiat options can be found in our API document. Each conversion is returned in its own \"quote\" object.\n\nExample: If you want to know the market quote is BTC and USD, you can use convert_id=1,2781.\n\nPlease note that the maximum number of results we return in each API call is 500. If the no. of convert_id param \nmultiplied by the limit param per API call is more than 500, you will receive an error message. ",
+									"disabled": true
+								},
+								{
+									"key": "skip_invalid",
+									"value": "boolean, default: true",
+									"description": "Pass true to relax request validation rules. When requesting records on multiple spot pairs an error is returned \nif no match is found for 1 or more requested spot pairs. If set to true, invalid lookups will be skipped allowing valid \nspot pairs to still be returned. ",
+									"disabled": true
+								},
+								{
+									"key": "reverse_order",
+									"value": "boolean, default: false",
+									"description": "Pass true to invert the order of a spot pair. For example, a trading pair is set up as Token B/Token A in the contract and \nis commonly referred to as Token A/Token B. Using reverse_order would change the order to reflect the true \nToken B/Token A pairing as it exists in the pool. ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/v4/dex/pairs/trade/latest - Latest 100 trades",
+					"id": "45608627-adb6f135-09e6-4a5f-928c-8e3dd5f36938",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CMC_PRO_API_KEY",
+								"value": "{{API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v4/dex/pairs/trade/latest?contract_address=string&network_slug=string",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v4",
+								"dex",
+								"pairs",
+								"trade",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "contract_address",
+									"value": "string",
+									"description": "One contract address. Example: \"0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640\".\n\nIf network/dex/base asset/quote asset information is passed, contract addresses cannot be passed.\n\nNote: contract_address is case sensitive for all non-EVM chains and not case sensitive for all EVM chains. EVM chains \ncontract addresses begin with 0x, and are followed by 40 alphanumeric characters (numerals and letters)."
+								},
+								{
+									"key": "network_id",
+									"value": "string",
+									"description": "One CoinMarketCap cryptocurrency network ids. Example: \"1\"",
+									"disabled": true
+								},
+								{
+									"key": "network_slug",
+									"value": "string",
+									"description": "Alternatively, one network names in URL friendly shorthand \"slug\" \nformat (all lowercase, spaces replaced with hyphens). Example: \"ethereum\". At least one \"id\" or \"slug\" is required."
+								},
+								{
+									"key": "aux",
+									"value": "string, default: null",
+									"description": "Optionally specify a comma-separated list of supplemental data fields to return. \nPass a valid value to include the auxiliary field.\n\nValid values:\n\"transaction_hash\", \"blockchain_explorer_link\", ETC",
+									"disabled": true
+								},
+								{
+									"key": "convert_id",
+									"value": "string, default: null",
+									"description": "Optionally calculate market quotes in up to 30 currencies at once by passing a cryptocurrency \nor fiat currency ID. A list of supported fiat options can be found in our API document. Each conversion is returned in its \nown \"trade\" object.\n\nExample: If you want to know the market quote is BTC, you can use convert_id=1. For USD, convert_id=2781.",
+									"disabled": true
+								},
+								{
+									"key": "skip_invalid",
+									"value": "boolean, default: true",
+									"description": "Pass true to relax request validation rules. When requesting records on multiple spot pairs an error is returned \nif no match is found for 1 or more requested spot pairs. If set to true, invalid lookups will be skipped allowing valid \nspot pairs to still be returned.",
+									"disabled": true
+								},
+								{
+									"key": "reverse_order",
+									"value": "boolean, default: false",
+									"description": "Pass true to invert the order of a spot pair. For example, a trading pair is set up as Token B/Token A in the contract and \nis commonly referred to as Token A/Token B. Using reverse_order would change the order to reflect the true \nToken B/Token A pairing as it exists in the pool. ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "45608627-d781ad54-a195-4ea6-a0ce-d3461eb3581f",
+			"description": "For more details on how to get started, visit this [link](https://coinmarketcap.com/academy/article/the-wait-is-over-cmc-releases-5-new-apis-to-complete-dex-suite). You can find expected responses for each API in this [Google Sheet](https://docs.google.com/spreadsheets/d/1VQ-GQ24omnCfoPRezqA2vCnoBLGt0RseKtchwhzBsHY/edit#gid=2054073052).\n\nWant to get started? Are you an existing API user? Log in [here](https://pro.coinmarketcap.com/login/). Are you a new API user? Sign up for free [here](https://pro.coinmarketcap.com/signup/?plan=0). All users (existing and new) have free access to 1 million credits monthly.\n\nIf you have any questions or are an enterprise looking for additional support, contact us at api@coinmarketcap.com.\n\nHappy building!"
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2aff7997-fa6a-4fbc-ada0-33635553fa01",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f8399d3b-37ae-49e2-86c7-ce6da37a44a4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://pro-api.coinmarketcap.com",
+			"type": "string"
+		},
+		{
+			"key": "API_KEY",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
